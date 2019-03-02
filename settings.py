@@ -8,3 +8,6 @@ LOG_LEVEL = logging.DEBUG    # 默认等级
 LOG_FMT = '%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)s: %(message)s'   # 默认日志格式
 LOG_DATEFMT = '%Y-%m-%d %H:%M:%S'  # 默认时间格式
 LOG_FILENAME = 'log.log'    # 默认日志文件名称
+
+# 设置延迟时间
+TEST_TIMEOUT = 60
