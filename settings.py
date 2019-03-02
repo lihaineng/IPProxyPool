@@ -10,4 +10,7 @@ LOG_DATEFMT = '%Y-%m-%d %H:%M:%S'  # 默认时间格式
 LOG_FILENAME = 'log.log'    # 默认日志文件名称
 
 # 设置延迟时间
-TEST_TIMEOUT = 60
+TEST_TIMEOUT = 10
+
+# 设置mongoddb的ｕｒｌ
+MONGO_URL = 'mongodb://127.0.0.1:27017'
