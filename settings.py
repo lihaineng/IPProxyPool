@@ -1,5 +1,5 @@
 # 在配置文件: settings.py 中 定义MAX_SCORE = 50, 表示代理IP的默认最高分数
-MAX_SCORE = 50
+MAX_SCORE = 10
 
 # 日志的配置信息
 import logging
@@ -27,3 +27,9 @@ PROXIES_SPIDERS = [
 
 # 配置爬虫重新启动的时间间隔, 单位为小时
 RUN_SPIDERS_INTERVAL = 2
+
+# 配置检测代理IP的异步数量
+TEST_PROXIES_ASYNC_COUNT = 10
+
+# 配置检查代理IP的时间间隔, 单位是小时
+TEST_PROXIES_INTERVAL = 2
