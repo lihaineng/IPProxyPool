@@ -3,8 +3,8 @@ from lxml import etree
 
 import requests
 
-from IPProxyPool.domain import Proxy
-from IPProxyPool.utils.http import get_request_headers
+from domain import Proxy
+from utils.http import get_request_headers
 
 
 class BaseSpider(object):

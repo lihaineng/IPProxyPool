@@ -3,9 +3,9 @@ import random
 import pymongo
 from pymongo import MongoClient
 
-from IPProxyPool.domain import Proxy
-from IPProxyPool.settings import MONGO_URL
-from IPProxyPool.utils.log import logger
+from domain import Proxy
+from settings import MONGO_URL
+from utils.log import logger
 
 
 class MongodbPool(object):

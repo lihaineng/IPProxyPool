@@ -15,7 +15,7 @@
 3. 提供 __str__ 方法, 返回数据字符串,方便提取
 4. 定义代理IP的数据模型类
 """
-from IPProxyPool.settings import MAX_SCORE
+from settings import MAX_SCORE
 
 
 class Proxy(object):

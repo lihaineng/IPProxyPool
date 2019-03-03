@@ -5,10 +5,10 @@ import json
 import time
 import requests
 
-from IPProxyPool.domain import Proxy
-from IPProxyPool.settings import TEST_TIMEOUT
-from IPProxyPool.utils.http import get_request_headers
-from IPProxyPool.utils.log import logger
+from domain import Proxy
+from settings import TEST_TIMEOUT
+from utils.http import get_request_headers
+from utils.log import logger
 
 
 def check_proxy(proxy):

@@ -14,3 +14,13 @@ TEST_TIMEOUT = 10
 
 # 设置mongoddb的ｕｒｌ
 MONGO_URL = 'mongodb://127.0.0.1:27017'
+
+# 爬虫模块配置
+PROXIES_SPIDERS = [
+    # 爬虫的全类名,路径: 模块.类名
+    'core.proxy_spider.proxy_spider.Ip66Spider',
+    'core.proxy_spider.proxy_spider.Ip3366Spider',
+    'core.proxy_spider.proxy_spider.KaiSpider',
+    'core.proxy_spider.proxy_spider.ProxylistplusSpider',
+    'core.proxy_spider.proxy_spider.XiciSpider',
+]

@@ -3,8 +3,9 @@ import time
 import re
 import js2py
 import requests
-from IPProxyPool.core.proxy_spider.base_spider import BaseSpider
-from IPProxyPool.utils.http import get_request_headers
+
+from core.proxy_spider.base_spider import BaseSpider
+from utils.http import get_request_headers
 
 """
 分析步骤：　
