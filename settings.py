@@ -24,3 +24,6 @@ PROXIES_SPIDERS = [
     'core.proxy_spider.proxy_spider.ProxylistplusSpider',
     'core.proxy_spider.proxy_spider.XiciSpider',
 ]
+
+# 配置爬虫重新启动的时间间隔, 单位为小时
+RUN_SPIDERS_INTERVAL = 2

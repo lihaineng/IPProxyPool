@@ -20,17 +20,27 @@
     4.2 创建当前类的对象, 调用run方法
     4.3 使用schedule模块, 每隔一定的时间, 执行当前对象的run方法
 """
+# 打猴子补丁,这个一般都放在上面
+import schedule
+import time
+from gevent import monkey
+monkey.patch_all()
+
+from gevent.pool import Pool
+
 import importlib
-from settings import PROXIES_SPIDERS
+from settings import PROXIES_SPIDERS, RUN_SPIDERS_INTERVAL
 from core.proxy_validata.httpbin_validator import check_proxy
 from core.db.mongo_pool import MongodbPool
+from utils.log import logger
 
 
 class RunSpider(object):
     def __init__(self):
         # 创建数据库对象方便后面存储
         self.mongod = MongodbPool()
-
+        # 获取携程池对象
+        self.gevent_pool = Pool()
 
     def get_spider_from_settings(self):
         """根据配置文件信息, 获取爬虫对象列表."""
@@ -52,8 +62,15 @@ class RunSpider(object):
         # 获取爬虫对象,通过配置获取实现插拔方便对爬虫更改
         spiders = self.get_spider_from_settings()
         for spider in spiders:
+            # 通过携程异步处理增加效率
+            self.gevent_pool.apply_async(self.__excute_eyery_spider, args=(spider,))
+        # 3.4 调用协程的join方法, 让当前线程等待 协程 任务的完成.即携程池中的任务都完成了才走下面的程序
+        self.gevent_pool.join()
+
+    def __excute_eyery_spider(self, spider):
+        try:
             # 遍历爬虫对象，调用对象的方法获取proxy对象集合
-            proxies = spider.get_proxies()
+            proxies = spider.get_proxies()  # 获取到的是可迭代对象
             for proxy in proxies:
                 # 检验proxy对象
                 proxy = check_proxy(proxy)
@@ -61,9 +78,19 @@ class RunSpider(object):
                 if proxy.speed != -1:
                     # 检测合格存入数据库
                     self.mongod.insert_one(proxy)
+        except Exception as ex:
+            logger.exception(ex)
+
+    @classmethod
+    def start(cls):
+        rs = RunSpider()
+        rs.run()  # 先要运行一次之后才开始监测
+        schedule.every(RUN_SPIDERS_INTERVAL).hours.do(rs.run)
+        while True:
+            schedule.run_pending()
+            time.sleep(60)
+
+
 
 if __name__ == '__main__':
-    rs = RunSpider()
-    rs.run()
-
-
+    RunSpider.start()
