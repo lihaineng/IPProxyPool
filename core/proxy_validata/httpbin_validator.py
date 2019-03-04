@@ -67,7 +67,13 @@ def __check_http_proxies(proxies, is_http=True):
             proxy_connection = dic['headers'].get('Proxy-Connection', None)
             if ',' in origin:
                 #    1. 如果 响应的origin 中有','分割的两个IP就是透明代理IP
-                nick_type = 2
+                origin = origin.split(', ')
+                if origin[0] == origin[1]:
+                    # 如果前后相同就是高匿
+                    nick_type = 0
+                else:
+                    # 否则透明
+                    nick_type = 2
             elif proxy_connection:
                 #    2. 如果 响应的headers 中包含 Proxy-Connection 说明是匿名代理IP
                 nick_type = 1
@@ -82,5 +88,13 @@ def __check_http_proxies(proxies, is_http=True):
 
 
 if __name__ == "__main__":
-    proxy = Proxy('116.209.54.16', '9999')
-    check_proxy(proxy)
+    # proxy = Proxy('116.209.54.16', '9999')
+    # check_proxy(proxy)
+    import requests
+
+    proxies = {
+        # 'http': 'http://185.132.133.195',
+        'http': 'http://170.83.172.203'
+    }
+    response = requests.get(' https://httpbin.org/get', proxies=proxies)
+    print(response.text)

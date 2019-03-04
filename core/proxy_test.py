@@ -69,7 +69,9 @@ class ProxyTester(object):
             schedule.run_pending()
             time.sleep(1)
 
-
 if __name__ == '__main__':
-    ProxyTester.start()
+    # ProxyTester.start()
+    pt = ProxyTester()
+    pt.run()
+
 

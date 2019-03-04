@@ -10,7 +10,7 @@ LOG_DATEFMT = '%Y-%m-%d %H:%M:%S'  # 默认时间格式
 LOG_FILENAME = 'log.log'    # 默认日志文件名称
 
 # 设置延迟时间
-TEST_TIMEOUT = 10
+TEST_TIMEOUT = 50
 
 # 设置mongoddb的ｕｒｌ
 MONGO_URL = 'mongodb://127.0.0.1:27017'
@@ -26,10 +26,13 @@ PROXIES_SPIDERS = [
 ]
 
 # 配置爬虫重新启动的时间间隔, 单位为小时
-RUN_SPIDERS_INTERVAL = 2
+RUN_SPIDERS_INTERVAL = 24
 
 # 配置检测代理IP的异步数量
 TEST_PROXIES_ASYNC_COUNT = 10
 
 # 配置检查代理IP的时间间隔, 单位是小时
 TEST_PROXIES_INTERVAL = 2
+
+# 配置获取的代理IP最大数量; 这个越小可用性就越高; 但是随机性越差
+PROXIES_MAX_COUNT = 300
