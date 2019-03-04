@@ -109,11 +109,7 @@ class MongodbPool(object):
         """
         proxy_list = self.get_proxies(protocol=protocol, domain=domain, count=count, nick_type=nick_type)
         # 从proxy_list列表中, 随机取出一个代理IP返回
-        if proxy_list:
-            proxy = random.choice(proxy_list)  # 如果列表为空choice会报错
-            return random.choice(proxy)
-        else:
-            return None
+        return random.choice(proxy_list)
 
     def disable_domain(self, ip, domain):
         """
